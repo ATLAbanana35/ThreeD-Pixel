@@ -7,13 +7,22 @@
   </head>
 
   <body>
-    <h1>ThreeD-Pixel</h1>
+    <h1>Créer un monde</h1>
     <main>
-      <h2>Minecraft in your Browser</h2>
-      <button class="play" type="submit">play</button>
+      <h2>settings</h2>
+      <h3>Puissance demandee 2=telephone,400=ordi</h3>
+      <input
+        type="range"
+        id="fps"
+        min="1"
+        max="400"
+        value="10"
+        oninput="document.querySelector('.p').textContent=this.value"
+      />
+      <span class="p">10</span>
       <br />
       <br />
-      <button class="GitHub" type="submit">Git Hub</button>
+      <button class="play" type="submit">Créer</button>
       <br />
       <br />
       <a href="https://loines.ch">WebSite</a>
@@ -26,9 +35,11 @@
         background-size: 400%;
         text-align: center;
       }
+
       h1 {
         font-size: 300%;
       }
+
       main {
         position: absolute;
         top: 50%;
@@ -36,6 +47,7 @@
         transform: translate(-50%, -50%);
         background: gray;
       }
+
       button {
         color: black;
         border: 1px solid black;
@@ -47,10 +59,9 @@
     </style>
     <script type="text/javascript" charset="utf-8">
       document.querySelector(".play").addEventListener("click", () => {
-        window.location = "create.html";
-      });
-      document.querySelector(".GitHub").addEventListener("click", () => {
-        window.location = "https://github.com/ATLAbanana35/ThreeD-Pixel";
+        let input = document.querySelector("#fps").value;
+        localStorage.setItem("fps", input);
+        window.location = "./play.php";
       });
     </script>
   </body>

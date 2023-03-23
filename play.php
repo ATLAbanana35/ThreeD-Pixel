@@ -88,6 +88,9 @@
       import { FBXLoader } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/FBXLoader";
       console.log("OK");
       console.log("start import...");
+      let Ultra_Pioche = false;
+      let Ultra_Steve = false;
+      let obsi = false;
       // Initialisation Three.js
       const scene = new THREE.Scene();
       let PsersoJump = 0.2;
@@ -516,6 +519,9 @@
                   scene.remove(instersect[0].object);
                   console.log(instersect[0]);
                   world.removeBody(instersect[0].object.userData.physicsBody);
+                  if (Ultra_Pioche) {
+                    blocks += 1000000;
+                  }
                   blocks += 1;
                   dest = true;
                 }
@@ -719,7 +725,41 @@
         requestAnimationFrame(animate);
 
         world.step(1 / 60);
-
+        if (!Ultra_Pioche) {
+          if (blocks > 20) {
+            alert("VOUS ÊTES UN SUPER-STEVE!");
+            if (confirm("VOULEZ-VOUS FINIR LE JEU????")) {
+              alert("Voilà un item qui peut vous aider ! (rdv à 100000000)");
+              document.querySelector(".inerh1").innerHTML +=
+                " 1X Ultra-Pioche!";
+              Ultra_Pioche = true;
+            }
+          }
+        }
+        if (!Ultra_Steve) {
+          if (blocks > 100000000) {
+            alert("VOUS ÊTES UN ULTRA-STEVE!");
+            if (confirm("Vous débloquez le craft de l'obsi")) {
+              document.querySelector(".inerh1").innerHTML += "+5 OBSI!";
+              Ultra_Pioche = true;
+              alert("POSEZ 10 Blocks et vous aurez l'obsi!");
+              obsi = true;
+              Ultra_Steve = true;
+              setTimeout(() => {
+                blocks = 10000000;
+              }, 1000);
+            }
+          }
+        }
+        if (obsi) {
+          if (blocks < 9999990) {
+            alert("Vous Voilà dans la dimension de l'ender!");
+            if (confirm("Voilà c'est finit (Vivement va V2!)")) {
+              window.location = "https://loines.ch/serveur/2D.php";
+              obsi = false;
+            }
+          }
+        }
         // Mise à jour de la position des cubes
         cube1.position.x = cube1.userData.physicsBody.position.x;
         cube1.position.y = cube1.userData.physicsBody.position.y;
